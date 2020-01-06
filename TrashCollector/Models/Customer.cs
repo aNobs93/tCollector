@@ -28,9 +28,9 @@ namespace TrashCollector.Models
         public string State { get; set; }
         public int ZipCode { get; set; }
         public double Balance { get; set; }
-        public string ExtraPickUpDate { get; set; }
-        public string SuspendedStart { get; set; }
-        public string SuspendedEnd { get; set; }
+        public DateTime ExtraPickUpDate { get; set; }
+        public DateTime SuspendedStart { get; set; }
+        public DateTime SuspendedEnd { get; set; }
         public bool PickUpConfirmation { get; set; }
 
     }
