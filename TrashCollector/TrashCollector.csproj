@@ -179,6 +179,10 @@
     <Compile Include="Migrations\202001062124423_EmployeeandCustomerModelsDone.Designer.cs">
       <DependentUpon>202001062124423_EmployeeandCustomerModelsDone.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001062234555_NewMigration.cs" />
+    <Compile Include="Migrations\202001062234555_NewMigration.Designer.cs">
+      <DependentUpon>202001062234555_NewMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -274,6 +278,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202001062124423_EmployeeandCustomerModelsDone.resx">
       <DependentUpon>202001062124423_EmployeeandCustomerModelsDone.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001062234555_NewMigration.resx">
+      <DependentUpon>202001062234555_NewMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

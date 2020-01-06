@@ -39,7 +39,7 @@ namespace TrashCollector.Controllers
         // GET: Employees/Create
         public ActionResult Create()
         {
-            ViewBag.ApplicationId = new SelectList(db.ApplicationUsers, "Id", "Email");
+            ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace TrashCollector.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ApplicationId = new SelectList(db.ApplicationUsers, "Id", "Email", employee.ApplicationId);
+            ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email", employee.ApplicationId);
             return View(employee);
         }
 
@@ -73,7 +73,7 @@ namespace TrashCollector.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ApplicationId = new SelectList(db.ApplicationUsers, "Id", "Email", employee.ApplicationId);
+            ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email", employee.ApplicationId);
             return View(employee);
         }
 
@@ -90,7 +90,7 @@ namespace TrashCollector.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ApplicationId = new SelectList(db.ApplicationUsers, "Id", "Email", employee.ApplicationId);
+            ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email", employee.ApplicationId);
             return View(employee);
         }
 
