@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace TrashCollector.Controllers
 {
-    [Authorize]
+
     public class RoleController : UsersController
     {
         // GET: Role
