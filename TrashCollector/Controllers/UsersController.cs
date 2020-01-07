@@ -12,6 +12,7 @@ namespace TrashCollector.Controllers
     [Authorize]
     public class UsersController : Controller
     {
+         public ApplicationDbContext context = new ApplicationDbContext();
         // GET: Users
         public ActionResult Index()
         {
@@ -41,7 +42,7 @@ namespace TrashCollector.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 var user = User.Identity;
-                ApplicationDbContext context = new ApplicationDbContext();
+            
                 var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
                 var s = UserManager.GetRoles(user.GetUserId());
                 if(s[0].ToString()== "Admin")
