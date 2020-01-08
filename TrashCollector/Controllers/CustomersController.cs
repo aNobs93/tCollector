@@ -18,21 +18,14 @@ namespace TrashCollector.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-
+            return View();
         }
 
         // GET: Customers/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Customer customer = db.Customers.Find(id);
-            if (customer == null)
-            {
-                return HttpNotFound();
-            }
+            string userId = User.Identity.GetUserId();
+            var customer = db.Customers.Where(u => u.ApplicationId == userId).FirstOrDefault();
             return View(customer);
         }
 
