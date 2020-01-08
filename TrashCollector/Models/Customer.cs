@@ -9,10 +9,6 @@ namespace TrashCollector.Models
 {
     public class Customer
     {        
-        public Customer()
-        {
-
-        }
         [Key]
         public int ID { get; set; }        
         
@@ -38,13 +34,13 @@ namespace TrashCollector.Models
         public double Balance { get; set; }
 
         [Display(Name = "Extra Pick Up Date")]
-        public DateTime ExtraPickUpDate { get; set; }
+        public string ExtraPickUpDate { get; set; }
 
         [Display(Name = "Start Of Trash Suspension")]
-        public DateTime SuspendedStart { get; set; }
+        public string SuspendedStart { get; set; }
 
         [Display(Name = "End Of Trash Suspension")]
-        public DateTime SuspendedEnd { get; set; }
+        public string SuspendedEnd { get; set; }
 
         [Display(Name = "Pick Up Confirmed")]
         public bool PickUpConfirmation { get; set; }

@@ -18,10 +18,7 @@ namespace TrashCollector.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            string userID = User.Identity.GetUserId();
-            var foundUser = db.Users.Where(u => u.Id == userID).FirstOrDefault();
-            var userId = User.Where()
-            return View(foundUser);
+
         }
 
         // GET: Customers/Details/5
@@ -42,8 +39,8 @@ namespace TrashCollector.Controllers
         // GET: Customers/Create
         public ActionResult Create()
         {
-            ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email");
-            return View();
+            Customer customer = new Customer();
+            return View(customer);
         }
 
         // POST: Customers/Create
@@ -51,17 +48,20 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,ApplicationId,PickUpDay,FirstName,LastName,StreetAddress,City,State,ZipCode,Balance,ExtraPickUpDate,SuspendedStart,SuspendedEnd,PickUpConfirmation")] Customer customer)
+       public ActionResult Create(Customer customer)
         {
-            if (ModelState.IsValid)
+            try
             {
+                string userId = User.Identity.GetUserId();
+                customer.ApplicationId = userId;
                 db.Customers.Add(customer);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email", customer.ApplicationId);
-            return View(customer);
+            catch
+            {
+                return View();
+            }
         }
 
         // GET: Customers/Edit/5

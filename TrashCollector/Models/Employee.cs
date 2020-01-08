@@ -9,10 +9,6 @@ namespace TrashCollector.Models
 {
     public class Employee
     {
-        public Employee()
-        {
-
-        }
         [Key]
         public int ID { get; set; }
         [ForeignKey("ApplicationUser")]
