@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -39,8 +40,8 @@ namespace TrashCollector.Controllers
         // GET: Employees/Create
         public ActionResult Create()
         {
-            ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email");
-            return View();
+            Employee employee = new Employee();
+            return View(employee);
         }
 
         // POST: Employees/Create
@@ -48,17 +49,21 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,ApplicationId,FirstName,LastName,ZipCode")] Employee employee)
+        public ActionResult Create(Employee employee)
         {
-            if (ModelState.IsValid)
+
+            try
             {
+                string userId = User.Identity.GetUserId();
+                employee.ApplicationId = userId;
                 db.Employees.Add(employee);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email", employee.ApplicationId);
-            return View(employee);
+            catch
+            {
+                return View();
+            }
         }
 
         // GET: Employees/Edit/5
