@@ -18,22 +18,16 @@ namespace TrashCollector.Controllers
         // GET: Employees
         public ActionResult Index()
         {
-            var employees = db.Employees.Include(e => e.ApplicationUser);
-            return View(employees.ToList());
+            //var employees = db.Employees.Include(e => e.ApplicationUser);
+            //return View(employees.ToList());
+            return View();
         }
 
         // GET: Employees/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Employee employee = db.Employees.Find(id);
-            if (employee == null)
-            {
-                return HttpNotFound();
-            }
+            string userId = User.Identity.GetUserId();
+            var employee = db.Employees.Where(u => u.ApplicationId == userId).FirstOrDefault();
             return View(employee);
         }
 
