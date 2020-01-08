@@ -63,19 +63,10 @@ namespace TrashCollector.Controllers
         }
 
         // GET: Employees/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Employee employee = db.Employees.Find(id);
-            if (employee == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email", employee.ApplicationId);
-            return View(employee);
+            Customer customer = db.Customers.Find(id);
+            return View(customer);
         }
 
         // POST: Employees/Edit/5
@@ -83,16 +74,27 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,ApplicationId,FirstName,LastName,ZipCode")] Employee employee)
+        public ActionResult Edit(int id, Customer customer)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(employee).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                Customer updatedCustomer = db.Customers.Find(id);
+            updatedCustomer.PickUpConfirmation = customer.PickUpConfirmation;
+            if(updatedCustomer.PickUpConfirmation == true)
+            {
+                updatedCustomer.Balance += (15 + customer.Balance);
+               
             }
-            ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email", employee.ApplicationId);
-            return View(employee);
+             db.SaveChanges();
+                return View("Index");
+
+            }
+            catch
+            {
+                return View();
+            }
+            
+
         }
 
         // GET: Employees/Delete/5
