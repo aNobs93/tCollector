@@ -17,8 +17,7 @@ namespace TrashCollector.Models
         public ApplicationUser ApplicationUser { get; set; }
 
         [Display(Name = "Pick up day")]
-        [Range(1,7)]
-        public int PickUpDay { get; set; }
+        public string PickUpDay { get; set; }
 
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
@@ -31,6 +30,8 @@ namespace TrashCollector.Models
         public string City { get; set; }
         public string State { get; set; }
         public int ZipCode { get; set; }
+
+        [Display(Name = "Balance Due: $")]
         public double Balance { get; set; }
 
         [Display(Name = "Extra Pick Up Date")]

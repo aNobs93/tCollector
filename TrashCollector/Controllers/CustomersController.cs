@@ -27,6 +27,7 @@ namespace TrashCollector.Controllers
             string userId = User.Identity.GetUserId();
             var customer = db.Customers.Where(u => u.ApplicationId == userId).FirstOrDefault();
             return View(customer);
+
         }
 
         // GET: Customers/Create

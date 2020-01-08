@@ -189,6 +189,10 @@
     <Compile Include="Migrations\202001081343150_ChangedExtraPickUpDateAndSuspensionPeriodDateFromDateTimeToString.Designer.cs">
       <DependentUpon>202001081343150_ChangedExtraPickUpDateAndSuspensionPeriodDateFromDateTimeToString.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001081447145_Changedpickupdayfrominttostring.cs" />
+    <Compile Include="Migrations\202001081447145_Changedpickupdayfrominttostring.Designer.cs">
+      <DependentUpon>202001081447145_Changedpickupdayfrominttostring.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -292,6 +296,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001081343150_ChangedExtraPickUpDateAndSuspensionPeriodDateFromDateTimeToString.resx">
       <DependentUpon>202001081343150_ChangedExtraPickUpDateAndSuspensionPeriodDateFromDateTimeToString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001081447145_Changedpickupdayfrominttostring.resx">
+      <DependentUpon>202001081447145_Changedpickupdayfrominttostring.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
