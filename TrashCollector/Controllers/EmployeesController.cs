@@ -74,6 +74,21 @@ namespace TrashCollector.Controllers
             }
         }
 
+        public ActionResult CustomerLocation(int id)
+        {
+            Customer customer = db.Customers.Find(id);
+            GeoCoderToFindCustomerLocation geoCoderToFindCustomerLocation = new GeoCoderToFindCustomerLocation();
+            var splitAddress = customer.StreetAddress.Split(new[] { ' ' }, 4);
+            geoCoderToFindCustomerLocation.address = splitAddress[0] + "+" + splitAddress[1] + "+" + splitAddress[2] + "+" + splitAddress[3] + "+" + splitAddress[4];
+            return View(geoCoderToFindCustomerLocation);
+        }
+
+        [HttpGet]
+        public ActionResult CustomerLocation(double lat, double lng)
+        {
+            return View();
+        }
+
         // GET: Employees/Edit/5
         public ActionResult Edit(int id)
         {
