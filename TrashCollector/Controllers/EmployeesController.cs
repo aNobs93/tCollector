@@ -18,11 +18,23 @@ namespace TrashCollector.Controllers
         // GET: Employees
         public ActionResult Index()
         {
+            EmployeeCustomersViewModel employeeCustomersViewModel = new EmployeeCustomersViewModel();
             string userId = User.Identity.GetUserId();
             string todaysDay = DateTime.Today.DayOfWeek.ToString();
             var employee = db.Employees.Where(u => u.ApplicationId == userId).FirstOrDefault();
-            var customersInMyArea = db.Customers.Where(u => u.ZipCode == employee.ZipCode && u.PickUpDay == todaysDay).ToList();
-            return View(customersInMyArea);
+            employeeCustomersViewModel.customers = db.Customers.Where(u => u.ZipCode == employee.ZipCode && u.PickUpDay == todaysDay).ToList();
+            employeeCustomersViewModel.daysOfWeek = new SelectList(new List<string>() { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" });
+            return View(employeeCustomersViewModel);
+        }
+        [HttpPost]
+        public ActionResult Index(EmployeeCustomersViewModel employeeCustomersViewModel)
+        {
+            string userId = User.Identity.GetUserId();
+            var employee = db.Employees.Where(u => u.ApplicationId == userId).FirstOrDefault();
+            employeeCustomersViewModel.customers = db.Customers.Where(u => u.ZipCode == employee.ZipCode && u.PickUpDay == employeeCustomersViewModel.selectedFilterDay).ToList();
+            employeeCustomersViewModel.daysOfWeek = new SelectList(new List<string>() { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" });
+
+            return View(employeeCustomersViewModel);
         }
 
         // GET: Employees/Details/5
@@ -79,13 +91,13 @@ namespace TrashCollector.Controllers
             try
             {
                 Customer updatedCustomer = db.Customers.Find(id);
-            updatedCustomer.PickUpConfirmation = customer.PickUpConfirmation;
-            if(updatedCustomer.PickUpConfirmation == true)
-            {
-                updatedCustomer.Balance += (15 + customer.Balance);
-               
-            }
-             db.SaveChanges();
+                updatedCustomer.PickUpConfirmation = customer.PickUpConfirmation;
+                if (updatedCustomer.PickUpConfirmation == true)
+                {
+                    updatedCustomer.Balance += (15 + customer.Balance);
+
+                }
+                db.SaveChanges();
                 return View("Index");
 
             }
@@ -93,7 +105,7 @@ namespace TrashCollector.Controllers
             {
                 return View();
             }
-            
+
 
         }
 
