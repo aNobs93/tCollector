@@ -80,7 +80,21 @@ namespace TrashCollector.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    //return RedirectToLocal(returnUrl);
+                    var user = await UserManager.FindAsync(model.UserName, model.Password);
+                    var roles = await UserManager.GetRolesAsync(user.Id);
+                    if (roles.Contains("Employee"))
+                    {
+                        return RedirectToAction("Index", "Employees");
+                    }
+                    else if (roles.Contains("Customer"))
+                    {
+                        return RedirectToAction("Index", "Customers");
+                    }
+                    else
+                    {
+                        return RedirectToLocal(returnUrl);
+                    }
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -462,6 +476,18 @@ namespace TrashCollector.Controllers
 
         private ActionResult RedirectToLocal(string returnUrl)
         {
+            //if (User.IsInRole("Employee"))
+            //{
+            //    return RedirectToAction("Index", "Employees");
+            //}
+            //else if(User.IsInRole("Customer"))
+            //{
+            //    return RedirectToAction("Index", "Customers");
+            //}
+            //else
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
             if (Url.IsLocalUrl(returnUrl))
             {
                 return Redirect(returnUrl);
