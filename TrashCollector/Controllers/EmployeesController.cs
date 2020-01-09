@@ -76,8 +76,10 @@ namespace TrashCollector.Controllers
 
         public ActionResult CustomerLocation(int id)
         {
+            
             Customer customer = db.Customers.Find(id);
             GeoCoderToFindCustomerLocation geoCoderToFindCustomerLocation = new GeoCoderToFindCustomerLocation();
+            string url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + geoCoderToFindCustomerLocation.address +
             var splitAddress = customer.StreetAddress.Split(new[] { ' ' }, 4);
             geoCoderToFindCustomerLocation.address = splitAddress[0] + "+" + splitAddress[1] + "+" + splitAddress[2] + "+" + splitAddress[3] + "+" + splitAddress[4];
             return View(geoCoderToFindCustomerLocation);
