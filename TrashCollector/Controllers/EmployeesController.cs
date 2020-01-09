@@ -3,8 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using TrashCollector.Models;
@@ -79,9 +82,17 @@ namespace TrashCollector.Controllers
             
             Customer customer = db.Customers.Find(id);
             GeoCoderToFindCustomerLocation geoCoderToFindCustomerLocation = new GeoCoderToFindCustomerLocation();
-            string url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + geoCoderToFindCustomerLocation.address +
-            var splitAddress = customer.StreetAddress.Split(new[] { ' ' }, 4);
-            geoCoderToFindCustomerLocation.address = splitAddress[0] + "+" + splitAddress[1] + "+" + splitAddress[2] + "+" + splitAddress[3] + "+" + splitAddress[4];
+            string url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + geoCoderToFindCustomerLocation.address + PrivateKeys.key1;
+         
+            //var splitAddress = customer.StreetAddress.Split(new[] { ' ' }, 4);
+            //geoCoderToFindCustomerLocation.address = splitAddress[0] + "+" + splitAddress[1] + "+" + splitAddress[2] + "+" + splitAddress[3] + "+" + splitAddress[4];
+            //HttpClient client = new HttpClient();
+            //HttpResponseMessage response = await client.GetAsync(url);
+            //string jsonResult = await response.Content.ReadAsStringAsync();
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    geoCoderToFindCustomerLocation.latit = jsonResult.
+            //}
             return View(geoCoderToFindCustomerLocation);
         }
 
