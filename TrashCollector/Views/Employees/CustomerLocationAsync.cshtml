@@ -21,9 +21,12 @@
             var customerLocation = { lat: @Model.latit , lng: @Model.longit };
 
             var map = new google.maps.Map(
-            document.getElementById('map'), { zoom: 4, center: customerLocation });
+            document.getElementById('map'), { zoom: 12, center: customerLocation });
 
+            var contentString ='<div id="content" >' + '<div id ="sitenotice">' + '</div>' + '<h1 id="firstHeading" class="firstHeading"> @Model.fullNameAndAddressToPutOnMarker</h1>' + '</div';
+            var infowindow = new google.maps.InfoWindow({ content: contentString });
             var marker = new google.maps.Marker({ position: customerLocation, map: map });
+            marker.addListener('click', function () { infowindow.open(map, marker);})
             }
     </script>
     <script src="@Model.mapAPICall" async defer></script>
