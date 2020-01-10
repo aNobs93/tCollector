@@ -85,9 +85,9 @@ namespace TrashCollector.Controllers
             GeoCoderToFindCustomerLocation geoCoderToFindCustomerLocation = new GeoCoderToFindCustomerLocation();         
             var splitAddress = customer.StreetAddress.Split(new[] { ' ' }, 4);
             //geoCoderToFindCustomerLocation.address = splitAddress[0] + "+" + splitAddress[1] + "+" + splitAddress[2] + "+" + splitAddress[3] + "+" + splitAddress[4];
-            string.Join("+", splitAddress);
-            geoCoderToFindCustomerLocation.address = splitAddress.ToString();
-            string url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + geoCoderToFindCustomerLocation.address + PrivateKeys.key1;
+            var finalAddress = string.Join("+", splitAddress);
+            geoCoderToFindCustomerLocation.address = finalAddress;
+            string url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + geoCoderToFindCustomerLocation.address + "&key=" + PrivateKeys.key1;
             HttpClient client = new HttpClient();
             HttpResponseMessage response = await client.GetAsync(url);
             string jsonResult = await response.Content.ReadAsStringAsync();
