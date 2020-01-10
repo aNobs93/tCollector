@@ -2,8 +2,15 @@
 
 @{
     ViewBag.Title = "Index";
+    ViewBag.TodaysDay = Model.selectedFilterDay;
 }
-<h1>Todays Pickups</h1>
+@if (Model.selectedFilterDay == null)
+{<h1> Todays Pickup</h1>
+}
+@if(Model.selectedFilterDay != null)
+{
+    <h1>@Model.selectedFilterDay Pickup</h1>
+}
 <table class="table">
     <tr>
         <th>
