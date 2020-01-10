@@ -94,6 +94,7 @@ namespace TrashCollector.Controllers
                 GeoResult postManJSON = JsonConvert.DeserializeObject<GeoResult>(jsonResult);
                 geoCoderToFindCustomerLocation.longit = postManJSON.results[0].geometry.location.lng;
                 geoCoderToFindCustomerLocation.latit = postManJSON.results[0].geometry.location.lng;
+                geoCoderToFindCustomerLocation.key = PrivateKeys.key1;
                 return View(geoCoderToFindCustomerLocation);
 
             }

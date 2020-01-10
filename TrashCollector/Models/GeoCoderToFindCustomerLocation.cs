@@ -10,5 +10,7 @@ namespace TrashCollector.Models
         public string address { get; set; }
         public double longit { get; set; }
         public double latit { get; set; }
+
+        public string key { get; set; }
     }
 }

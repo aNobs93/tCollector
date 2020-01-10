@@ -20,13 +20,20 @@
                 @Html.ActionLink("Pick Up Dat Trash Right Durr", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("C-Details", "Details", "Customers")</li>
+                @if (User.IsInRole("Employee"))
+                {
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Employees")</li>
+                    </ul>
+                }
+                @if (User.IsInRole("Customer"))
+                {
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Customers")</li>
+                        <li>@Html.ActionLink("Profile", "Details", "Customers")</li>
+                    </ul>
+                }
 
-                </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
