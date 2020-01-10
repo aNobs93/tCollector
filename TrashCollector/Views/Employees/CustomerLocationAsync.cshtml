@@ -25,9 +25,10 @@
 
             var contentString ='<div id="content" >' + '<div id ="sitenotice">' + '</div>' + '<h1 id="firstHeading" class="firstHeading"> @Model.fullNameAndAddressToPutOnMarker</h1>' + '</div';
             var infowindow = new google.maps.InfoWindow({ content: contentString });
-            var marker = new google.maps.Marker({ position: customerLocation, map: map });
-            marker.addListener('click', function () { infowindow.open(map, marker);})
-            }
+            var marker = new google.maps.Marker({ position: customerLocation, map: map, animation: google.maps.Animation.BOUNCE });
+            marker.addListener('click', function () { infowindow.open(map, marker); })
+
+        }
     </script>
     <script src="@Model.mapAPICall" async defer></script>
 </body>
