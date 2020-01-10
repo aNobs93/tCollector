@@ -84,6 +84,7 @@ namespace TrashCollector.Controllers
             GeoCoderToFindCustomerLocation geoCoderToFindCustomerLocation = new GeoCoderToFindCustomerLocation();         
             var splitAddress = customer.StreetAddress.Split(new[] { ' ' }, 4);
             var finalAddress = string.Join("+", splitAddress);
+            finalAddress += ",+" + customer.City + ",+" + customer.State;
             geoCoderToFindCustomerLocation.address = finalAddress;
             string url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + geoCoderToFindCustomerLocation.address + "&key=" + PrivateKeys.key1;
             HttpClient client = new HttpClient();
@@ -93,13 +94,10 @@ namespace TrashCollector.Controllers
             {
                 GeoResult postManJSON = JsonConvert.DeserializeObject<GeoResult>(jsonResult);
                 geoCoderToFindCustomerLocation.longit = postManJSON.results[0].geometry.location.lng;
-                geoCoderToFindCustomerLocation.latit = postManJSON.results[0].geometry.location.lng;
-                geoCoderToFindCustomerLocation.key = PrivateKeys.key1;
+                geoCoderToFindCustomerLocation.latit = postManJSON.results[0].geometry.location.lat;
                 return View(geoCoderToFindCustomerLocation);
 
             }
-
-
 
             return View();
         }

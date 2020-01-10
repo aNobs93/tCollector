@@ -11,6 +11,7 @@ namespace TrashCollector.Models
         public double longit { get; set; }
         public double latit { get; set; }
 
+        public string mapAPICall = "https://maps.googleapis.com/maps/api/js?key=" + PrivateKeys.key1 + "&callback=initMap";
         public string key { get; set; }
     }
 }
