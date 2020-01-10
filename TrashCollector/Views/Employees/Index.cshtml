@@ -7,7 +7,11 @@
 @if (Model.selectedFilterDay == null)
 {<h1> Todays Pickup</h1>
 }
-@if(Model.selectedFilterDay != null)
+@if (Model.selectedFilterDay == (DateTime.Today.DayOfWeek).ToString())
+{
+    <h1>Todays Pickup</h1>
+}
+@if (Model.selectedFilterDay != null && Model.selectedFilterDay != (DateTime.Today.DayOfWeek).ToString())
 {
     <h1>@Model.selectedFilterDay Pickup</h1>
 }
