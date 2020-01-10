@@ -273,7 +273,7 @@
     <Content Include="Views\Customers\Index.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
     <Content Include="Views\Employees\Edit.cshtml" />
-    <Content Include="Views\Employees\CustomerLocationMap.cshtml" />
+    <Content Include="Views\Employees\CustomerLocationAsync.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

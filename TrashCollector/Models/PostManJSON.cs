@@ -6,8 +6,6 @@ using System.Web;
 
 namespace TrashCollector.Models
 {
-    public class PostManJSON
-    {
         public class GeoResult
         {
             public Result[] results { get; set; }
@@ -80,4 +78,3 @@ namespace TrashCollector.Models
             public string[] types { get; set; }
         }
     }
-}

@@ -80,11 +80,9 @@ namespace TrashCollector.Controllers
 
         public async System.Threading.Tasks.Task<ActionResult> CustomerLocationAsync(int id)
         {
-            PostManJSON postManJSON;
             Customer customer = db.Customers.Find(id);
             GeoCoderToFindCustomerLocation geoCoderToFindCustomerLocation = new GeoCoderToFindCustomerLocation();         
             var splitAddress = customer.StreetAddress.Split(new[] { ' ' }, 4);
-            //geoCoderToFindCustomerLocation.address = splitAddress[0] + "+" + splitAddress[1] + "+" + splitAddress[2] + "+" + splitAddress[3] + "+" + splitAddress[4];
             var finalAddress = string.Join("+", splitAddress);
             geoCoderToFindCustomerLocation.address = finalAddress;
             string url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + geoCoderToFindCustomerLocation.address + "&key=" + PrivateKeys.key1;
@@ -93,11 +91,16 @@ namespace TrashCollector.Controllers
             string jsonResult = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
             {
-                postManJSON = JsonConvert.DeserializeObject<PostManJSON>(jsonResult);
+                GeoResult postManJSON = JsonConvert.DeserializeObject<GeoResult>(jsonResult);
+                geoCoderToFindCustomerLocation.longit = postManJSON.results[0].geometry.location.lng;
+                geoCoderToFindCustomerLocation.latit = postManJSON.results[0].geometry.location.lng;
+                return View(geoCoderToFindCustomerLocation);
+
             }
-            
-            
-            return View(geoCoderToFindCustomerLocation);
+
+
+
+            return View();
         }
 
         [HttpGet]
