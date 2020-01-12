@@ -183,11 +183,11 @@ namespace TrashCollector.Controllers
                     //var foundUser = context.Users.Where(u => u.Id == userID).FirstOrDefault();
                     if (model.UserRoles.Equals("Employee"))
                     {                       
-                        return RedirectToAction("Create", "Employees");
+                        return RedirectToAction("Create", "Employees", model);
                     }
                     else if (model.UserRoles.Equals("Customer"))
                     {
-                        return RedirectToAction("Create", "Customers");
+                        return RedirectToAction("Create", "Customers" , model);
 
                     }
                     else

@@ -22,6 +22,7 @@ namespace TrashCollector.Controllers
         // GET: Employees
         public ActionResult Index()
         {
+            
             EmployeeCustomersViewModel employeeCustomersViewModel = new EmployeeCustomersViewModel();
             string userId = User.Identity.GetUserId();
             string todaysDay = DateTime.Today.DayOfWeek.ToString();
@@ -122,7 +123,7 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, Customer customer)
+        public ActionResult Edit(int id, Customer customer, EmployeeCustomersViewModel employeeCustomersViewModel)
         {
             try
             {
@@ -134,7 +135,13 @@ namespace TrashCollector.Controllers
 
                 }
                 db.SaveChanges();
-                return View("Index");
+                //string userId = User.Identity.GetUserId();
+                //string todaysDay = DateTime.Today.DayOfWeek.ToString();
+                //var employee = db.Employees.Where(u => u.ApplicationId == userId).FirstOrDefault();
+                //employeeCustomersViewModel.customers = db.Customers.Where(u => u.ZipCode == employee.ZipCode && u.PickUpDay == employeeCustomersViewModel.selectedFilterDay).ToList();
+                //employeeCustomersViewModel.daysOfWeek = new SelectList(new List<string>() { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" });
+                //return View("Index", employeeCustomersViewModel);
+                return RedirectToAction("Index");
 
             }
             catch

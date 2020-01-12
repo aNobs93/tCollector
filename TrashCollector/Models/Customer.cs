@@ -41,13 +41,13 @@ namespace TrashCollector.Models
         public double Balance { get; set; }
 
         [Display(Name = "Extra Pick Up Date: ")]
-        public string ExtraPickUpDate { get; set; }
+        public DateTime? ExtraPickUpDate { get; set; }
 
         [Display(Name = "Start Of Trash Suspension: ")]
-        public string SuspendedStart { get; set; }
+        public DateTime? SuspendedStart { get; set; }
 
         [Display(Name = "End Of Trash Suspension: ")]
-        public string SuspendedEnd { get; set; }
+        public DateTime? SuspendedEnd { get; set; }
 
         [Display(Name = "Pick Up Confirmed: ")]
         public bool PickUpConfirmation { get; set; }

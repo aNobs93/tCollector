@@ -6,7 +6,6 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -18,7 +17,8 @@
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("Pick Up Dat Trash Right Durr", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
+            </div>            
+           
             <div class="navbar-collapse collapse">
                 @if (User.IsInRole("Employee"))
                 {
@@ -33,7 +33,6 @@
                         <li>@Html.ActionLink("Profile", "Details", "Customers")</li>
                     </ul>
                 }
-
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
