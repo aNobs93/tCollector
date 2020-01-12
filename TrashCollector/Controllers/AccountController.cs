@@ -85,10 +85,20 @@ namespace TrashCollector.Controllers
                     var roles = await UserManager.GetRolesAsync(user.Id);
                     if (roles.Contains("Employee"))
                     {
+                        var employee = context.Employees.Where(u => u.ApplicationId == user.Id).FirstOrDefault();
+                        if(employee == null)
+                        {
+                            return RedirectToAction("Create", "Employees");
+                        }
                         return RedirectToAction("Index", "Employees");
                     }
                     else if (roles.Contains("Customer"))
-                    {
+                    {                   
+                        var customer = context.Customers.Where(u => u.ApplicationId == user.Id).FirstOrDefault();
+                        if(customer == null)
+                        {
+                            return RedirectToAction("Create", "Customers");
+                        }
                         return RedirectToAction("Index", "Customers");
                     }
                     else
@@ -183,11 +193,11 @@ namespace TrashCollector.Controllers
                     //var foundUser = context.Users.Where(u => u.Id == userID).FirstOrDefault();
                     if (model.UserRoles.Equals("Employee"))
                     {                       
-                        return RedirectToAction("Create", "Employees", model);
+                        return RedirectToAction("Create", "Employees");
                     }
                     else if (model.UserRoles.Equals("Customer"))
                     {
-                        return RedirectToAction("Create", "Customers" , model);
+                        return RedirectToAction("Create", "Customers");
 
                     }
                     else

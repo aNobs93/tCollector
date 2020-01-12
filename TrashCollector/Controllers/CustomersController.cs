@@ -44,6 +44,7 @@ namespace TrashCollector.Controllers
         [ValidateAntiForgeryToken]
        public ActionResult Create(Customer customer)
         {
+            
             try
             {
                 string userId = User.Identity.GetUserId();
